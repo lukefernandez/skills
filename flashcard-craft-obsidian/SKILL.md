@@ -124,12 +124,12 @@ Cards are stored as individual Markdown files in an Obsidian vault (e.g., `2-car
 
 ### Filename
 
-Use a **GUID** (globally unique identifier) for the filename — no spaces, no special characters. The filename (without `.md`) becomes the stable `CardID` in Anki, so renaming a file creates a duplicate card.
+Use a **timestamp-based GUID** in the format `YYMMDDHHmmss` (12 digits: year, month, day, hour, minute, second) for the filename. The filename (without `.md`) becomes the stable `CardID` in Anki, so renaming a file creates a duplicate card.
 
-Examples of valid GUID filenames:
-- `260529221553.md` (timestamp-based)
-- `892146999764.md` (random numeric)
-- `a1b2c3d4-e5f6-7890-abcd-ef1234567890.md` (UUID-style)
+When generating multiple cards, ensure no duplicate filenames are produced. If two cards would share the same timestamp, increment the second card's timestamp by 1 second (e.g., `260604123456.md`, `260604123457.md`, `260604123458.md`).
+
+Example:
+- `260529221553.md`
 
 ### YAML Frontmatter
 
@@ -261,7 +261,7 @@ For each card, output a complete Markdown file content block that the user can s
 
 Example:
 
-**Filename:** `892146999764.md`
+**Filename:** `260604123456.md`
 
 ```markdown
 ---
@@ -277,7 +277,7 @@ What should I ask myself if I notice I'm using water in savory cooking?
 "Should I use stock instead?"
 ```
 
-When generating multiple cards, output each one as a separate code block with its filename clearly labeled.
+When generating multiple cards, output each one as a separate code block with its filename clearly labeled. Ensure all suggested filenames are unique by incrementing the timestamp if necessary.
 
 ## Final Principle
 
