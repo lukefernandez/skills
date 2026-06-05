@@ -308,13 +308,12 @@ A. "Should I use stock instead?"
 
 ### Review Workflow
 
-When the skill is invoked with **no input**, it should perform a review cycle on **one random card** from the current directory:
+When the skill is invoked with **no input**, it should perform a review cycle on **exactly ONE random card** from the current directory. Under no circumstances should more than one card be selected, read, or archived in a single invocation:
 
-1. **Select a card**: Pick a random `.md` card file from the current directory (not from subdirectories).
-2. **Review**: Read the card, evaluate its quality, and propose improvements or replacements.
-3. **Archive the reviewed card**: Move the reviewed card file to the `./archive/` subdirectory.
+1. **Select exactly ONE card**: Pick a single random `.md` card file from the current directory (not from subdirectories). Stop after selecting one file—do not select a second.
+2. **Review**: Read the selected card, evaluate its quality, and propose improvements or replacements.
+3. **Archive the reviewed card**: Move the single reviewed card file to the `./archive/` subdirectory.
 4. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` from the original card.
-5. **One at a time**: Never review or process more than one card in a single call.
 
 ### Creating New Cards
 
