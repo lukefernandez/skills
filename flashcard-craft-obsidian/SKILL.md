@@ -122,6 +122,23 @@ Go beyond what's explicitly written. Convert specific examples into general prin
 
 Cards are stored as individual Markdown files in an Obsidian vault (e.g., `2-cards/`). A sync script parses these files and pushes them to Anki via Anki-Connect. Each card file must follow the conventions below so the parser recognizes it correctly.
 
+### Directory Workflow
+
+Use subdirectories within your cards folder to manage the card lifecycle:
+
+- **`processed/`** — Place newly created cards and updated cards here. The sync script reads from this directory to push changes to Anki.
+- **`deleted/`** — Move original card files here when they are no longer needed. This acts as an archive and keeps the main directory clean while preserving history.
+
+Example structure:
+```
+2-cards/
+├── processed/
+│   ├── 260604123456.md
+│   └── 260604123457.md
+└── deleted/
+    └── 260529221553.md
+```
+
 ### Filename
 
 Use a **timestamp-based GUID** in the format `YYMMDDHHmmss` (12 digits: year, month, day, hour, minute, second) for the filename. The filename (without `.md`) becomes the stable `CardID` in Anki, so renaming a file creates a duplicate card.
@@ -257,7 +274,7 @@ A. "Should I use stock instead?"
 
 ### Final Card File Output
 
-For each card, output a complete Markdown file content block that the user can save directly into their `2-cards/` (or equivalent) folder. Include the YAML frontmatter, a valid GUID filename suggestion, and the properly formatted card body.
+For each card, output a complete Markdown file content block that the user can save directly into their `2-cards/processed/` (or equivalent) folder. Include the YAML frontmatter, a valid GUID filename suggestion, and the properly formatted card body.
 
 Example:
 
