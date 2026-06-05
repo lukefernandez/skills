@@ -126,8 +126,8 @@ Cards are stored as individual Markdown files in an Obsidian vault (e.g., `2-car
 
 Use subdirectories within your cards folder to manage the card lifecycle:
 
-- **`processed/`** — Place newly created cards and updated cards here. The sync script reads from this directory to push changes to Anki.
-- **`deleted/`** — Move original card files here when they are no longer needed. This acts as an archive and keeps the main directory clean while preserving history.
+- **`processed/`** — Place newly created cards here. The sync script reads from this directory to push changes to Anki.
+- **`archive/`** — Move cards here after they have been reviewed. This acts as an archive and keeps the main directory clean while preserving history.
 
 Example structure:
 ```
@@ -135,7 +135,7 @@ Example structure:
 ├── processed/
 │   ├── 260604123456.md
 │   └── 260604123457.md
-└── deleted/
+└── archive/
     └── 260529221553.md
 ```
 
@@ -272,6 +272,16 @@ Q. What should I ask myself if I notice I'm using water in savory cooking?
 A. "Should I use stock instead?"
 ```
 
+### Review Workflow
+
+When the skill is invoked with **no input**, it should perform a review cycle on **one random card** from the current directory:
+
+1. **Select a card**: Pick a random `.md` card file from the current directory (not from subdirectories).
+2. **Review**: Read the card, evaluate its quality, and propose improvements or replacements.
+3. **Archive the reviewed card**: Move the reviewed card file to the `./archive/` subdirectory.
+4. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding.
+5. **One at a time**: Never review or process more than one card in a single call.
+
 ### Creating New Cards
 
 For each new card, use file write tools to create the file directly in the user's `2-cards/processed/` (or equivalent) folder. Generate a `YYMMDDHHmmss` timestamp GUID for the filename. Ensure no duplicate timestamps by incrementing the seconds if needed.
@@ -280,29 +290,20 @@ Example path: `2-cards/processed/260604123456.md`
 
 Content should include full YAML frontmatter and properly formatted card body.
 
-### Updating Existing Cards
+### Archiving Cards
 
-When revising an existing card:
-1. Read the current file contents first.
-2. Use edit tools to update the card content and bump the `modified:` date in frontmatter.
-3. Write the updated file back to `processed/` (overwriting or replacing as needed).
-
-### Deleting Cards
-
-When a card is no longer needed:
-1. Use bash commands (mv/cp) to move the original card file from its current location to the `deleted/` subdirectory.
-2. Do not delete files permanently—archive them in `deleted/` for history.
+After reviewing a card, move the original file to the `archive/` subdirectory to preserve history.
 
 Example:
 ```bash
-mv 2-cards/processed/260529221553.md 2-cards/deleted/260529221553.md
+mv 2-cards/260529221553.md 2-cards/archive/260529221553.md
 ```
 
 ### File Operations Checklist
 
-- [ ] Created new files in `processed/` with unique `YYMMDDHHmmss` filenames
-- [ ] Updated existing files in `processed/` with new `modified:` dates
-- [ ] Moved deprecated originals to `deleted/` (if applicable)
+- [ ] Selected exactly one random card from the current directory for review
+- [ ] Moved the reviewed card to `archive/`
+- [ ] Created new files in `processed/` with unique `YYMMDDHHmmss` filenames (one review can produce multiple cards)
 - [ ] Verified all files were written successfully
 
 ## Final Principle
