@@ -248,7 +248,7 @@ Both standard and cloze cards support full Markdown rendering via `marked`:
 
 ## Output Format
 
-When helping the user create or revise prompts, first present them in a readable Q/A preview, then provide the final **Obsidian card file content** ready to save.
+When helping the user create or revise prompts, first present them in a readable Q/A preview for review, then **actually create or update the files on disk** using file tools (write/edit). Do not just show markdown blocks—persist the changes.
 
 ### Readable Preview
 
@@ -272,29 +272,38 @@ Q. What should I ask myself if I notice I'm using water in savory cooking?
 A. "Should I use stock instead?"
 ```
 
-### Final Card File Output
+### Creating New Cards
 
-For each card, output a complete Markdown file content block that the user can save directly into their `2-cards/processed/` (or equivalent) folder. Include the YAML frontmatter, a valid GUID filename suggestion, and the properly formatted card body.
+For each new card, use file write tools to create the file directly in the user's `2-cards/processed/` (or equivalent) folder. Generate a `YYMMDDHHmmss` timestamp GUID for the filename. Ensure no duplicate timestamps by incrementing the seconds if needed.
+
+Example path: `2-cards/processed/260604123456.md`
+
+Content should include full YAML frontmatter and properly formatted card body.
+
+### Updating Existing Cards
+
+When revising an existing card:
+1. Read the current file contents first.
+2. Use edit tools to update the card content and bump the `modified:` date in frontmatter.
+3. Write the updated file back to `processed/` (overwriting or replacing as needed).
+
+### Deleting Cards
+
+When a card is no longer needed:
+1. Use bash commands (mv/cp) to move the original card file from its current location to the `deleted/` subdirectory.
+2. Do not delete files permanently—archive them in `deleted/` for history.
 
 Example:
-
-**Filename:** `260604123456.md`
-
-```markdown
----
-created: 2026-06-04
-modified: 2026-06-04
-tags:
-  - cooking
----
-What should I ask myself if I notice I'm using water in savory cooking?
-
----
-
-"Should I use stock instead?"
+```bash
+mv 2-cards/processed/260529221553.md 2-cards/deleted/260529221553.md
 ```
 
-When generating multiple cards, output each one as a separate code block with its filename clearly labeled. Ensure all suggested filenames are unique by incrementing the timestamp if necessary.
+### File Operations Checklist
+
+- [ ] Created new files in `processed/` with unique `YYMMDDHHmmss` filenames
+- [ ] Updated existing files in `processed/` with new `modified:` dates
+- [ ] Moved deprecated originals to `deleted/` (if applicable)
+- [ ] Verified all files were written successfully
 
 ## Final Principle
 
