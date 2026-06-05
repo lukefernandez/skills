@@ -5,9 +5,9 @@ description: Use when the user wants to create, write, revise, review, or improv
 
 # Flashcard Craft: Writing Effective Spaced Repetition Prompts
 
-Based on Andy Matuschak's *"How to write good prompts: using spaced repetition to create understanding"* (https://andymatuschak.org/prompts/).
+Based on Andy Matuschak's _"How to write good prompts: using spaced repetition to create understanding"_ (https://andymatuschak.org/prompts/).
 
-When the user asks for help with flashcards, spaced repetition, or memory prompts, guide them using these principles. Do not just create cards—help them craft *good* cards that produce understanding, not just rote memorization.
+When the user asks for help with flashcards, spaced repetition, or memory prompts, guide them using these principles. Do not just create cards—help them craft _good_ cards that produce understanding, not just rote memorization.
 
 ## Core Properties of Effective Prompts
 
@@ -31,7 +31,7 @@ Exception: If the subject is already familiar, use fewer prompts because there's
 
 - Break lists into single-element prompts. Don't ask "What are the ingredients?" Ask about one item at a time.
 - Use **cloze deletions** (fill-in-the-blank) for lists. Keep the list order consistent so the user learns its visual "shape."
-- Add **explanation prompts** for challenging facts: *How* or *why* does this fact work? This makes facts meaningful and hooks them to other ideas.
+- Add **explanation prompts** for challenging facts: _How_ or _why_ does this fact work? This makes facts meaningful and hooks them to other ideas.
 - **Reverse prompts**: For every "Q → A" prompt, consider an "A → Q" prompt, especially for vocabulary or terms.
 
 ### 2. Procedural Knowledge (How to do things)
@@ -39,10 +39,10 @@ Exception: If the subject is already familiar, use fewer prompts because there's
 - Identify the **keywords** that carry the procedure: important verbs, conditions, adverbs (e.g., "slowly"), and heuristics (e.g., "when X happens, do Y").
 - Don't prompt for obvious steps. If the first step is "put ingredients in a pot" and that's common sense, skip it.
 - Capture **branching conditions** and **special cases**; these are often the most important parts of a procedure.
-- Add **explanation prompts** for procedures to avoid rote learning: *Why* do we do it this way?
+- Add **explanation prompts** for procedures to avoid rote learning: _Why_ do we do it this way?
 - Add **"heads-up" prompts** for timing or expectations that prevent confusion in practice.
 
-### 3. Conceptual Knowledge (Understanding what something *is*)
+### 3. Conceptual Knowledge (Understanding what something _is_)
 
 Parroting a definition is not knowing a concept. Use these **lenses** to trace the edges of a concept:
 
@@ -59,7 +59,7 @@ Open lists (e.g., "ways to use X") are different from closed lists (e.g., "ingre
 - **Instance → Tag**: Link specific examples to the broader category. (e.g., "When puréeing vegetables, how can I add richness without fat?" → "Use stock instead of water.")
 - **Tag → Pattern**: Write prompts about patterns you notice across instances. (e.g., "What should I ask myself if I notice I'm using water in savory cooking?")
 - **Tag → Examples**: Ask for examples on demand, but pair this with instance-level prompts or the examples will be shallow and inconsistent.
-- **Creative prompts**: For open-ended concepts, ask for novel applications ("Give an answer you haven't given before"). These reinforce the *process* of generating answers, not the answers themselves.
+- **Creative prompts**: For open-ended concepts, ask for novel applications ("Give an answer you haven't given before"). These reinforce the _process_ of generating answers, not the answers themselves.
 
 ### 5. Salience Prompts (Behavior change & noticing)
 
@@ -74,12 +74,14 @@ The goal is to keep an idea "top of mind" so the user notices opportunities to a
 ### Cues
 
 Add context that helps retrieval without making the answer trivial.
+
 - **Good cue**: "??? (herb)" — leaves work to do (many herbs exist).
 - **Bad cue**: "??? (rhymes with parrots)" — answerable without knowing the material.
 
 ### Elaborative Encoding
 
 Connect information to other memories to make it more recallable.
+
 - Add vivid mnemonic imagery in the **answer** (in parentheses).
 - Use visuals, personal experiences, humor, or disgust.
 - Example: "A. carrots (rhymes with 'parrots': picture a flock of parrots flying with carrots in their mouths, dropping them into a pot of stock)"
@@ -87,14 +89,15 @@ Connect information to other memories to make it more recallable.
 ### Interpretation
 
 Go beyond what's explicitly written. Convert specific examples into general principles or ratios.
+
 - Instead of "How much chicken bone in Andy's recipe?", ask "What's the ratio of chicken bones to water in chicken stock?"
-- This is the first step to creating *your own* understanding.
+- This is the first step to creating _your own_ understanding.
 
 ## Litmus Tests (Quality Checks)
 
 ### False Positives: Can you answer correctly without knowing the material?
 
-- **Avoid pattern matching**: Keep questions short and simple. Don't let the user memorize the *shape* of the question.
+- **Avoid pattern matching**: Keep questions short and simple. Don't let the user memorize the _shape_ of the question.
 - **Avoid binary prompts**: Yes/no or this/that questions require little effort. Rephrase as open-ended. (e.g., instead of "Does X happen?" → "How does X affect Y?")
 
 ### False Negatives: Might you know the material but fail to produce the correct answer?
