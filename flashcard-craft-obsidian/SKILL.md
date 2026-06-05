@@ -139,6 +139,40 @@ Example structure:
     └── 260529221553.md
 ```
 
+### Self-Contained Cards
+
+Every card must contain all the context needed to answer it. In Anki, cards are reviewed in isolation—do not rely on the user remembering external material, other cards, or the source note.
+
+- **Avoid external references**: Do not use pronouns like "this," "that," "it," "the above," or "the following" to refer to material outside the card.
+- **Include the full context**: If a question refers to a code snippet, definition, or passage, include that snippet directly in the card front.
+- **Standalone questions**: A user should be able to answer the card correctly without opening the source note or recalling other cards.
+
+**Example (bad):**
+```markdown
+What does this produce?
+
+---
+
+true
+```
+The word "this" refers to a code block outside the card. The user cannot answer without external context.
+
+**Example (good):**
+```markdown
+What does the following code produce in JavaScript?
+
+```js
+/a cat/.test('that is a cat');
+```
+
+---
+
+```txt
+true
+```
+```
+The code block is included directly in the card, so the question is fully self-contained.
+
 ### Filename
 
 Use a **timestamp-based GUID** in the format `YYMMDDHHmmss` (12 digits: year, month, day, hour, minute, second) for the filename. The filename (without `.md`) becomes the stable `CardID` in Anki, so renaming a file creates a duplicate card.
@@ -177,7 +211,7 @@ modified: 2026-04-20
 tags:
   - execute-program
 ---
-What does this produce in JavaScript?
+What does the following code produce in JavaScript?
 
 ```js
 /a cat/.test('that is a cat');
@@ -189,7 +223,7 @@ What does this produce in JavaScript?
 true
 ```
 
-Spaces are treated as normal characters. If they're in the regex, they'll have to be in the matched string too.
+The regex `/a cat/` contains a space. In JavaScript regexes, spaces are literal characters, so the matched string must contain the space too.
 ```
 
 **Rules for standard cards:**
