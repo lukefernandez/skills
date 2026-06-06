@@ -126,8 +126,8 @@ Cards are stored as individual Markdown files in an Obsidian vault (e.g., `2-car
 
 Use subdirectories within your cards folder to manage the card lifecycle:
 
-- **`processed/`** — Place newly created cards here. The sync script reads from this directory to push changes to Anki.
-- **`archive/`** — Move cards here after they have been reviewed. This acts as an archive and keeps the main directory clean while preserving history.
+- **`processed/`** — The destination for **all** cards that are ready for Anki. This includes (a) newly created cards and (b) original cards that were reviewed and kept as-is. The sync script reads from this directory.
+- **`archive/`** — **Only** for original cards that were reviewed and replaced with new cards. Never put newly created cards here.
 
 Example structure:
 ```
@@ -308,13 +308,15 @@ A. "Should I use stock instead?"
 
 ### Review Workflow
 
-When the skill is invoked with **no input**, it should perform a review cycle on **exactly ONE random card** from the current directory. Under no circumstances should more than one card be selected, read, or archived in a single invocation:
+When the skill is invoked with **no input**, it should perform a review cycle on **exactly ONE random card** from the current directory. Under no circumstances should more than one card be selected, read, or moved in a single invocation:
 
 1. **Select exactly ONE card**: Pick a single random `.md` card file from the current directory (not from subdirectories). Stop after selecting one file—do not select a second.
 2. **Review**: Read the selected card, evaluate its quality, and propose improvements or replacements.
 3. **Handle ambiguity**: If the card is ambiguous, confusing, or doesn't make sense, **ask the user what to do next**. Do not archive the card or create new cards until the user provides guidance.
-4. **Archive the reviewed card**: Move the single reviewed card file to the `./archive/` subdirectory.
-5. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` and `source` from the original card. **If the original card did not have `tags` or a `source`, do not make them up—leave those fields absent or empty.**
+4. **Decide the card's fate**:
+   - If the card is **replaced** with new cards: Move the original to `./archive/`.
+   - If the card **stays as-is** with no changes: Move the original to `./processed/`.
+5. **Create new cards** (if applicable): Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` and `source` from the original card. **If the original card did not have `tags` or a `source`, do not make them up—leave those fields absent or empty.**
 
 ### Creating New Cards
 
@@ -324,19 +326,24 @@ Example path: `2-cards/processed/260604123456.md`
 
 Content should include full YAML frontmatter and properly formatted card body.
 
-### Archiving Cards
+### Archiving and Processing Cards
 
-After reviewing a card, move the original file to the `archive/` subdirectory to preserve history.
+- **Archive** (`./archive/`): Only for **original cards that were replaced** with new cards. This preserves history. Do not put newly created cards here.
+- **Processed** (`./processed/`): For **all cards that are ready for Anki**. This includes newly created cards AND original cards that were reviewed and kept as-is.
 
-Example:
+Examples:
 ```bash
+# Card was replaced with new cards
 mv 2-cards/260529221553.md 2-cards/archive/260529221553.md
+
+# Card was reviewed and kept as-is
+mv 2-cards/260529221553.md 2-cards/processed/260529221553.md
 ```
 
 ### File Operations Checklist
 
 - [ ] Selected exactly one random card from the current directory for review
-- [ ] Moved the reviewed card to `archive/`
+- [ ] Moved the reviewed card to `archive/` (if replaced) or `processed/` (if kept as-is)
 - [ ] Created new files in `processed/` with unique `YYMMDDHHmmss` filenames (one review can produce multiple cards)
 - [ ] Verified all files were written successfully
 
