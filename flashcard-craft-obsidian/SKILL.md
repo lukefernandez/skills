@@ -197,8 +197,8 @@ source: "[[note-link|Display Title]]"
 ---
 ```
 
-- `tags`: List format (`  - tag`). These become Anki tags.
-- `source`: Optional link back to the source note in Obsidian.
+- `tags`: List format (`  - tag`). These become Anki tags. Omit this field if the original card did not have tags—do not invent them.
+- `source`: Optional link back to the source note in Obsidian. Omit this field if the original card did not have a source—do not make one up.
 
 ### Standard (Basic) Cards
 
@@ -314,7 +314,7 @@ When the skill is invoked with **no input**, it should perform a review cycle on
 2. **Review**: Read the selected card, evaluate its quality, and propose improvements or replacements.
 3. **Handle ambiguity**: If the card is ambiguous, confusing, or doesn't make sense, **ask the user what to do next**. Do not archive the card or create new cards until the user provides guidance.
 4. **Archive the reviewed card**: Move the single reviewed card file to the `./archive/` subdirectory.
-5. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` from the original card.
+5. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` and `source` from the original card. **If the original card did not have `tags` or a `source`, do not make them up—leave those fields absent or empty.**
 
 ### Creating New Cards
 
