@@ -312,8 +312,9 @@ When the skill is invoked with **no input**, it should perform a review cycle on
 
 1. **Select exactly ONE card**: Pick a single random `.md` card file from the current directory (not from subdirectories). Stop after selecting one file—do not select a second.
 2. **Review**: Read the selected card, evaluate its quality, and propose improvements or replacements.
-3. **Archive the reviewed card**: Move the single reviewed card file to the `./archive/` subdirectory.
-4. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` from the original card.
+3. **Handle ambiguity**: If the card is ambiguous, confusing, or doesn't make sense, **ask the user what to do next**. Do not archive the card or create new cards until the user provides guidance.
+4. **Archive the reviewed card**: Move the single reviewed card file to the `./archive/` subdirectory.
+5. **Create new cards**: Based on the review, create one or more new cards in `./processed/`. A single review can spawn multiple cards if breaking the original into smaller prompts or adding related prompts improves understanding. New cards must retain the `tags` from the original card.
 
 ### Creating New Cards
 
